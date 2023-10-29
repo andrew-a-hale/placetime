@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    .center {
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<body onload="getLocation()">
+    <div class="center">
+        <span id="placetime">GETTING PLACE</span>
+    </div>
+
+    <script>
+        const x = document.getElementById("placetime");
+        var lon;
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                lon = navigator.geolocation.getCurrentPosition(saveLon);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function saveLon(position) {
+            lon = position.coords.longitude
+        }
+
+        setInterval(function placetime() {
+            if (lon) {
+                x.innerHTML = (((lon / 360 * 86400) + (Date.now() / 1000)) % 86400) / 86400;
+            } else {
+                x.innerHTML = "GETTING PLACE"
+            }
+        }, 500);
+
+    </script>
+
+</body>
+
+</html>
