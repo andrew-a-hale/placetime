@@ -17,6 +17,9 @@
 
     <script>
         const x = document.getElementById("placetime");
+        const secondsInDay = 86400
+        const secondsInHalfDay = 43200
+        const maxLon = 180
         var lon;
 
         function getLocation() {
@@ -33,7 +36,7 @@
 
         setInterval(function placetime() {
             if (lon) {
-                x.innerHTML = (((lon / 360 * 86400) + (Date.now() / 1000)) % 86400) / 86400;
+                x.innerHTML = (((lon / maxLon * secondsInHalfDay) + (Date.now() / 1000)) % secondsInDay) / secondsInDay;
             } else {
                 x.innerHTML = "GETTING PLACE"
             }
