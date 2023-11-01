@@ -3,7 +3,7 @@ A new, better time.
 
 # Formula
 ```
-Placetime(Lon) = ((placeAdjust(Lon) + sunPos) % secondsInDay) / secondsInDay
+placetime(Lon) = ((placeAdjust(Lon) + sunPos) % secondsInDay) / secondsInDay
 
 Where:
     secondsInDay = 86400
@@ -13,4 +13,4 @@ Where:
 
 ## Calculation
 How many meters to the east/west to cause 0.00001 change in placetime?  
-400.75 meters === 0.00001 * Earth Circumference in meters
+400.75 meters ~= 0.00001 * Earth Circumference in meters
