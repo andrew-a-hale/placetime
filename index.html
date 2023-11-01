@@ -42,8 +42,6 @@
             if (lon) {
                 val = (((lon / maxLon * secondsInHalfDay) + (Date.now() / 1000)) % secondsInDay) / secondsInDay;
                 x.innerHTML = Number.parseFloat(val).toFixed(10);
-            } else {
-                x.innerHTML = "GETTING PLACE";
             }
         }, 10);
 
