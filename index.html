@@ -17,30 +17,35 @@
 
     <script>
         const x = document.getElementById("placetime");
-        const secondsInDay = 86400
-        const secondsInHalfDay = 43200
-        const maxLon = 180
+        const secondsInDay = 86400;
+        const secondsInHalfDay = 43200;
+        const maxLon = 180;
         var lon;
+
+        function error(err) {
+            console.error(`ERROR(${err.code}): ${err.message}`);
+        }
 
         function getLocation() {
             if (navigator.geolocation) {
-                lon = navigator.geolocation.getCurrentPosition(saveLon);
+                navigator.geolocation.watchPosition(saveLon, error, {enableHighAccuracy: true});
             } else {
                 x.innerHTML = "Geolocation is not supported by this browser.";
             }
         }
 
         function saveLon(position) {
-            lon = position.coords.longitude
+            lon = position.coords.longitude;
         }
 
         setInterval(function placetime() {
             if (lon) {
-                x.innerHTML = (((lon / maxLon * secondsInHalfDay) + (Date.now() / 1000)) % secondsInDay) / secondsInDay;
+                val = (((lon / maxLon * secondsInHalfDay) + (Date.now() / 1000)) % secondsInDay) / secondsInDay;
+                x.innerHTML = Number.parseFloat(val).toFixed(10);
             } else {
-                x.innerHTML = "GETTING PLACE"
+                x.innerHTML = "GETTING PLACE";
             }
-        }, 500);
+        }, 10);
 
     </script>
 
